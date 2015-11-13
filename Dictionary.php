@@ -26,23 +26,21 @@ class Dictionary{
 			}
 				fclose($File);
 			//size up the Table of Trie trees
-			$TrieTable= array_pad($TrieTable,(strlen($initLine) + 1), new Trie());
+			for($i = 0; $i < strlen($initLine)+1;$i++){
+				$TrieTable[] = new Trie();
+			}
 			$File = fopen("largedictionary.txt","r");
 			//start inserting words
 				while(!feof($File)){
 					insert(fgets($File));
 				}
-
 		}
 
 	}
 
-
-
 	function insert($word){
 		$TrieTable[strlen($word)].insert($word);
 	}
-
 
 	/*Find the Shortest Path.*/
 	function WordLadderCompute($StringX, $StringY){
@@ -56,7 +54,6 @@ class Dictionary{
 		else
 			$TrieTable[strlen($StringX)].findPath($StringX, $StringY);
 	}
-
 }
 
 ?>
