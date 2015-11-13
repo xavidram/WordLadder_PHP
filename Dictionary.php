@@ -3,7 +3,7 @@
 require_once("TrieTree.php");
 
 class Dictionary{
-	public $TrieTable; 
+	public $TrieTable = array(); 
 	//try it out first with a text file
 
 
@@ -26,7 +26,7 @@ class Dictionary{
 			}
 				fclose($File);
 			//size up the Table of Trie trees
-			$TrieTable = array(strlen($initLine) + 1);
+			$TrieTable= array_pad($TrieTable,(strlen($initLine) + 1), new Trie());
 			$File = fopen("largedictionary.txt","r");
 			//start inserting words
 				while(!feof($File)){
@@ -36,6 +36,8 @@ class Dictionary{
 		}
 
 	}
+
+
 
 	function insert($word){
 		$TrieTable[strlen($word)].insert($word);
